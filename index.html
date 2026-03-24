@@ -72,6 +72,11 @@
         #btnStergeTot {
             margin-top: 10px;
         }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px orange;
+        }
     
     </style>
 </head> 
@@ -199,6 +204,8 @@
         };
 
         function stergeTot() {
+            if (!confirm("Sigur vrei sa stergi toate taskurile?")) return;
+
             document.getElementById("taskList").innerHTML = "";
             actualizeazaCounter();
             salveazaTaskuri();
