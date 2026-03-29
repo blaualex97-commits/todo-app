@@ -9,6 +9,7 @@
             color: white;
             font-family: Arial, sans-serif;
             padding: 40px;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .todo-container {
@@ -17,11 +18,26 @@
             background-color: #1b1b1b;
             padding: 30px;
             border-radius: 16px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            animation: fadeUp 0.8s ease;
+            transition: background-color 0.3s, color 0.3s;           
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         h1 {
             color: orange;
             text-align: center;
+            letter-spacing: 1px;
         }
 
         input {
@@ -30,6 +46,13 @@
             border: none;
             border-radius: 8px;
             font-size: 16px;
+            background-color: #2a2a2a;
+            color: white;
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px orange;
         }
 
         button {
@@ -40,98 +63,392 @@
             color: black;
             font-size: 16px;
             cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform:  translateY(-1px);
         }
 
         ul {
             margin-top: 20px;
-            padding-left: 20px;
+            padding-left: 0;
+            list-style: none;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 38px,
+                rgba(255, 255, 255, 0.12) 39px,
+                rgba(255, 255, 255, 0.08) 40px
+            );
+            border-radius: 10px;
+            padding: 10px 0;
+            border-left: 3px solid orange;
+            padding-left: 12px;
+            min-height: 60px;
         }
 
         li {
-            margin-bottom: 10px;
-            font-size: 18px;
+            min-height: 40px;
+            font-size: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 6px 12px;
+            box-sizing: border-box;
+            animation: fadeIn 0.3s ease;
+            gap: 10px;
         }
 
-        li button {
-            background-color: red;
-            color: white;
-            border: none;
-            padding: 6px 10px;
+        li:hover {
+            background-color: rgba(255, 255, 255, 0.05);
             border-radius: 6px;
+        }
+
+        li span {
+            flex: 1;
             cursor: pointer;
+            font-weight: 500;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .task-actions button {
+            padding: 6px 10px;
+            font-size: 14px;
+            border-radius: 999px;
+        }
+
+        .edit-btn {
+            background-color: #ff9800;
+            color: black;
+        }
+
+        .delete-btn {
+            background-color: #b22222;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background-color: #ff3b3b;
         }
 
         .completed {
             text-decoration: line-through;
-            opacity: 0.6;
+            text-decoration-thickness: 2px;
+            text-decoration-color: #ff6666;
+            opacity: 0.45;
+            font-style: italic;
+            color: #cfcfcf;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #999;
+            padding: 16px;
+            font-style: italic;
+        }
+
+        .top-bar {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .top-bar input {
+            flex: 1;
+            margin: 0;
+        }
+
+        .tema-btn,
+        .adauga-btn {
+            width: auto;
+            white-space: nowrap;
+        }
+
+        .info-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 15px;
+        }
+
+        .stats span {
+            background: rgba(255, 165, 0, 0.12);
+            padding: 6px 10px;
+            border-radius: 999px;
         }
 
         #btnStergeTot {
-            margin-top: 10px;
+            margin-top: 0;
         }
 
-        input:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px orange;
+        #filtre {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
-    
+
+        #filtre button.activ {
+            background-color: red;
+            color: white;
+        }
+
+        #filtre button:hover {
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .light-mode {
+            background-color: #f5f5f5;
+            color: #111;
+        }
+
+        .light-mode .todo-container {
+            background-color: white;
+            color: #111;
+            border: 1px solid #ddd;
+        }
+
+        .light-mode input {
+            background-color: #f0f0f0;
+            color: #111;
+            border: 1px solid #d0d0d0;
+        }
+
+        .light-mode h1 {
+            color: #cc5500;
+        }
+
+        .light-mode button {
+            background-color: #ff6600;
+        }
+
+        .light-mode .edit-btn {
+            background-color: #ff9800;
+            color: black;
+        }
+
+        .light-mode .delete-btn {
+            background-color: red;
+            color: white;
+        }
+
+        .light-mode ul {
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 38px,
+                rgba(0, 0, 0, 0.14) 39px,
+                rgba(0, 0, 0, 0.08) 40px
+            );
+            border-left: 3px solid #ff8800;
+        }
+
+        .light-mode li span {
+            color: #222;
+        }
+
+        .light-mode li:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .light-mode .completed {
+            color: #555;
+            opacity: 1;
+            text-decoration: line-through;
+            text-decoration-thickness: 2px;
+            text-decoration-color: #cc5500;
+            font-style: italic;
+        }
+
+        .light-mode .empty-state {
+            color: #777;
+        }
+
+        .light-mode .stats span {
+            background: rgba(255, 102, 0, 0.12);
+        }
+
+        .light-mode #filtre button.activ {
+            background-color: #e63946;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .todo-container {
+                padding: 20px;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .top-bar input {
+                width: 100%;
+            }
+
+            .tema-btn,
+            .adauga-btn,
+            button {
+                width: 100%;
+            }
+
+            .info-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .task-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
     </style>
 </head> 
 <body>
     <div class="todo-container">
         <h1>To Do App</h1>
 
-        <input type="text" id="taskInput" placeholder="Scrie un task" onkeydown="apasareEnter(event)"> 
-        <button onclick="adaugaTask()">Adauga</button>
 
-        <ul id="taskList"></ul>  
-        
-        <p id="counter">Taskuri: 0</p>
+        <div class="top-bar">
+            <button class="tema-btn" onclick="schimbaTema()">Tema</button>
+            <input type="text" id="taskInput" placeholder="Scrie un task" onkeydown="apasareEnter(event)">
+            <button class="adauga-btn" onclick="adaugaTask()">Adauga</button>
+        </div>
 
-        <button id="btnStergeTot" onclick="stergeTot()" style="display: none;">
-            Sterge toate
-        </button>
+        <ul id="taskList"></ul>
+
+        <div id="emptyState" class="empty-state" style="display: none;">
+            Nu ai taskuri momentan. Adauga unul nou.
+        </div>
+
+        <div class="info-bar">
+            <div class="stats">
+                <span id="totalCount">Total: 0</span>
+                <span id="activeCount">Active: 0</span>
+                <span id="completedCount">Complete: 0</span>
+            </div>
+
+            <button id="btnStergeTot" onclick="stergeTot()" style="display: none;">
+                Sterge toate
+            </button>
+        </div>
+
+        <div id="filtre">
+            <button onclick="filtreaza('toate')">Toate</button>
+            <button onclick="filtreaza('active')">Active</button>
+            <button onclick="filtreaza('complete')">Complete</button>
+        </div>
     </div>
 
     <script>
-        function adaugaTask() {
-            let taskText = document.getElementById("taskInput").value.trim();
+        let filtruCurent = "toate";
 
-            if (taskText === "") {
-                return;
-                
+        function creeazaTask(text, completed = false) {
+            let li = document.createElement("li");
+
+            let span = document.createElement("span");
+            span.innerText = text;
+
+            if (completed) {
+                span.classList.add("completed");
             }
 
-            let li = document.createElement("li");
-            
-            let span = document.createElement("span");
-            span.innerText = taskText;
-            
             span.onclick = function () {
                 span.classList.toggle("completed");
                 salveazaTaskuri();
+                actualizeazaStatistici();
+                filtreaza(filtruCurent);
             };
 
-            let btn = document.createElement("button");
-            btn.innerText = "X";
+            let actions = document.createElement("div");
+            actions.className = "task-actions";
 
-            btn.onclick = function () {
+            let editBtn = document.createElement("button");
+            editBtn.innerText = "Edit";
+            editBtn.className = "edit-btn";
+
+            editBtn.onclick = function () {
+                let textNou = prompt("Editeaza taskul:", span.innerText);
+
+                if (textNou !== null && textNou.trim() !== "") {
+                    span.innerText = textNou.trim();
+                    salveazaTaskuri();
+                    actualizeazaStatistici();
+                    filtreaza(filtruCurent);
+                }
+            };
+
+            let deleteBtn = document.createElement("button");
+            deleteBtn.innerText = "X";
+            deleteBtn.className = "delete-btn";
+
+            deleteBtn.onclick = function () {
                 li.remove();
-                actualizeazaCounter();
                 salveazaTaskuri();
+                actualizeazaStatistici();
+                filtreaza(filtruCurent);
             };
+
+            actions.appendChild(editBtn);
+            actions.appendChild(deleteBtn);
 
             li.appendChild(span);
-            li.appendChild(btn);
+            li.appendChild(actions);
 
             document.getElementById("taskList").appendChild(li);
-            document.getElementById("taskInput").value = "";
-           
-            actualizeazaCounter();
+        }
+
+        function adaugaTask() {
+            let taskInput = document.getElementById("taskInput");
+            let taskText = taskInput.value.trim();
+
+            if (taskText === "") return;
+
+            creeazaTask(taskText);
+            taskInput.value = "";
+
             salveazaTaskuri();
+            actualizeazaStatistici();
+            filtreaza(filtruCurent);
         }
 
         function apasareEnter(event) {
@@ -140,17 +457,21 @@
             }
         }
 
-        function actualizeazaCounter() {
-            let total = document.getElementById("taskList").children.length;
-            document.getElementById("counter").innerText = "Taskuri: " + total;
+        function actualizeazaStatistici(){
+            let items = document.querySelectorAll("#taskList li span");
+            let total = items.length;
+            let complete = document.querySelectorAll("#taskList li span.completed").length;
+            let active = total - complete;
 
-            let btn = document.getElementById("btnStergeTot");
+            document.getElementById("totalCount").innerText = "Total: " + total;
+            document.getElementById("activeCount").innerText = "Active: " + active;
+            document.getElementById("completedCount").innerText = "Complete: " + complete;
 
-            if (total > 0) {
-                btn.style.display = "inline-block";
-            } else {
-                btn.style.display = "none";    
-            }
+            let btnStergeTot = document.getElementById("btnStergeTot");
+            let emptyState = document.getElementById("emptyState");
+
+            btnStergeTot.style.display = total > 0 ? "inline-block" : "none";
+            emptyState.style.display = total === 0 ? "block" : "none";
         }
 
         function salveazaTaskuri() {
@@ -167,50 +488,73 @@
             localStorage.setItem("taskuri", JSON.stringify(lista));
         }
 
-        window.onload = function () {
+        function incarcaTaskuri() {
             let data = JSON.parse(localStorage.getItem("taskuri")) || [];
 
             data.forEach(task => {
-                let li = document.createElement("li");
-
-                let span = document.createElement("span");
-                span.innerText = task.text;
-
-                if (task.completed) {
-                    span.classList.add("completed");       
-                }
-
-                span.onclick = function () {
-                    span.classList.toggle("completed");
-                    salveazaTaskuri();
-                };
-
-                let btn = document.createElement("button");
-                btn.innerText = "X";
-                
-                btn.onclick = function () {
-                    li.remove();
-                    salveazaTaskuri();
-                    actualizeazaCounter();
-                };
-
-                li.appendChild(span);
-                li.appendChild(btn);
-
-                document.getElementById("taskList").appendChild(li);
+                creeazaTask(task.text, task.completed);
             });
 
-            actualizeazaCounter();
-        };
+            actualizeazaStatistici();
+            filtreaza("toate");
+        }
 
         function stergeTot() {
             if (!confirm("Sigur vrei sa stergi toate taskurile?")) return;
-
-            document.getElementById("taskList").innerHTML = "";
-            actualizeazaCounter();
+            
+            document.getElementById('taskList').innerHTML = "";
             salveazaTaskuri();
+            actualizeazaStatistici();
+            filtreaza(filtruCurent);
         }
 
+        function filtreaza(tip) {
+            filtruCurent = tip;
+
+            let tasks = document.querySelectorAll("#taskList li");
+
+            tasks.forEach(task => {
+                let span = task.querySelector("span");
+
+                if (tip === "toate") {
+                    task.style.display = "flex";
+                } else if (tip === "active") {
+                    task.style.display = !span.classList.contains("completed") ? "flex" : "none";
+                } else if (tip === "complete") {
+                    task.style.display = span.classList.contains("completed") ? "flex" : "none";
+                }
+            });
+
+            let buttons = document.querySelectorAll("#filtre button");
+            buttons.forEach(button => button.classList.remove("activ"));
+
+            if (tip === "toate") buttons[0].classList.add("activ");
+            if (tip === "active") buttons[1].classList.add("activ");
+            if (tip === "complete") buttons[2].classList.add("activ");
+        }
+
+        function schimbaTema() {
+            document.body.classList.toggle("light-mode");
+
+            if (document.body.classList.contains("light-mode")) {
+                localStorage.setItem("tema", "light");
+            } else {
+                localStorage.setItem("tema", "dark");
+            }
+        }
+
+        function incarcaTema() {
+            let temaSalvata = localStorage.getItem("tema");
+
+            if (temaSalvata === "light") {
+                document.body.classList.add("light-mode");
+            }
+        }
+
+        window.onload = function () {
+            incarcaTema();
+            incarcaTaskuri();
+        };
     </script>
 </body>   
 </html>
